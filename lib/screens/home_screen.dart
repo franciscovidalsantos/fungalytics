@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fungalytics/screens/collection_page_screen.dart';
 import 'package:fungalytics/screens/home_page_screen.dart';
 import 'package:fungalytics/screens/scan_page_screen.dart';
+import 'package:fungalytics/screens/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +21,15 @@ class _HomeScreenState extends State<HomeScreen> {
     CollectionPageScreen(),
   ];
 
+  void _openSettingsScreen() {
+    showModalBottomSheet(
+      useSafeArea: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => SettingsScreen(),
+    );
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -34,9 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.settings),
             color: Colors.white,
-            onPressed: () {
-              // navigate to settings screen
-            },
+            onPressed: _openSettingsScreen,
           ),
         ],
         title: Text("Fungalytics", style: TextStyle(color: Colors.white)),
