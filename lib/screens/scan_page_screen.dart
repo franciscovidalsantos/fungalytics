@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-// import 'package:fungalytics/services/kindwise_service.dart';
+import 'package:fungalytics/services/kindwise_service.dart';
 import 'package:fungalytics/services/mock_kindwise_service.dart';
 import 'package:fungalytics/models/mushroom_response.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +19,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   MushroomResponse? _mushroom;
   bool _isLoading = false;
   final _picker = ImagePicker();
-  final _kindwiseService = MockKindwiseService();
+  final _kindwiseService = KindwiseService();
 
   // Function to pick an image
   Future<void> _pickImage(ImageSource source) async {
