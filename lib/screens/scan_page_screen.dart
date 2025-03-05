@@ -135,7 +135,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
               ],
             ] else
               Text(
-                "Mushroom not detected! ${(_mushroom?.isMushroomProbability ?? 0.0).toStringAsFixed(2)}",
+                "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
               ),
           ],
         ),
