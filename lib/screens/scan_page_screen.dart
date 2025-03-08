@@ -19,7 +19,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   MushroomResponse? _mushroom;
   bool _isLoading = false;
   final _picker = ImagePicker();
-  final _kindwiseService = KindwiseService();
+  final _kindwiseService = MockKindwiseService();
 
   // Function to pick an image
   Future<void> _pickImage(ImageSource source) async {
@@ -121,18 +121,18 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
               ),
               SizedBox(height: 20),
-              Text("Found ${_mushroom?.suggestions.length} matches:"),
+              Text("Found ${_mushroom?.suggestions?.length} matches:"),
               for (
                 int i = 0;
-                i < (_mushroom?.suggestions.length ?? 0);
+                i < (_mushroom?.suggestions?.length ?? 0);
                 i++
               ) ...[
                 SizedBox(height: 20),
                 Text(
-                  "Suggestion ${i + 1}: ${_mushroom?.suggestions[i].name ?? 'Unknown'}",
+                  "Suggestion ${i + 1}: ${_mushroom?.suggestions?[i].name ?? 'Unknown'}",
                 ),
                 Text(
-                  "Probability: ${((_mushroom?.suggestions[i].probability ?? 0.0) * 100).toStringAsFixed(2)}%",
+                  "Probability: ${((_mushroom?.suggestions?[i].probability ?? 0.0) * 100).toStringAsFixed(2)}%",
                 ),
 
                 // if (_mushroom?.suggestions[i].similarImages == null &&
@@ -143,7 +143,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 // TODO: understand if its worth it to only use this condition instead of the one above
                 // since we used a mock data that may return null for similarImages due to sending true regarding
                 // similar_images property inside of our POST request body
-                if (_mushroom?.suggestions[i].similarImages == null)
+                if (_mushroom?.suggestions?[i].similarImages == null)
                   ...[]
                 else ...[
                   Text("Similar Images:"),
@@ -158,7 +158,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                             int g = 0;
                             g <
                                 (_mushroom
-                                        ?.suggestions[0]
+                                        ?.suggestions?[i]
                                         .similarImages!
                                         .length ??
                                     0);
@@ -168,7 +168,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                               padding: const EdgeInsets.fromLTRB(4, 4, 0, 4),
                               child: Image.network(
                                 _mushroom
-                                        ?.suggestions[i]
+                                        ?.suggestions?[i]
                                         .similarImages![g]
                                         .image ??
                                     '',
