@@ -15,7 +15,7 @@ class ScanPageScreen extends StatefulWidget {
 }
 
 class _ScanPageScreenState extends State<ScanPageScreen> {
-  File? _image;
+  File? _selectedImage;
   MushroomResponse? _mushroom;
   bool _isLoading = false;
   final _picker = ImagePicker();
@@ -26,7 +26,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        _selectedImage = File(pickedFile.path);
         _mushroom = null; // Reset result
       });
       _identifyMushroom();
@@ -35,12 +35,12 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
 
   // Convert image to Base64 and send it to the API
   Future<void> _identifyMushroom() async {
-    if (_image == null) return;
+    if (_selectedImage == null) return;
 
     setState(() => _isLoading = true);
 
     try {
-      final bytes = await _image!.readAsBytes();
+      final bytes = await _selectedImage!.readAsBytes();
       final base64Image = base64Encode(bytes);
       final mushroom = await _kindwiseService.identifyMushroom(base64Image);
 
@@ -61,42 +61,40 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-        child: Column(
-          children: [
-            if (_image == null)
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(child: Text("Pick an image to start scanning.")),
-                  ],
-                ),
-              )
-            else
-              Expanded(
-                child:
-                    _isLoading
-                        ? Center(child: CircularProgressIndicator())
-                        : _mushroom != null
-                        ? Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [_buildMushroomInfo()],
-                        )
-                        : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Ocurred a problem picking the image, try again",
-                            ),
-                          ],
-                        ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: Column(
+        children: [
+          if (_selectedImage == null)
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(child: Text("Pick an image to start scanning.")),
+                ],
               ),
-            _buildImagePickerButtons(),
-          ],
-        ),
+            )
+          else
+            Expanded(
+              child:
+                  _isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : _mushroom != null
+                      ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [_buildMushroomInfo()],
+                      )
+                      : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Ocurred a problem picking the image, try again",
+                          ),
+                        ],
+                      ),
+            ),
+          _buildImagePickerButtons(),
+        ],
       ),
     );
   }
@@ -108,13 +106,17 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.file(
-              _image!,
+              _selectedImage!,
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
             SizedBox(height: 20),
-            if (_mushroom?.isMushroom == true) ...[
+            if (_mushroom?.isMushroom == false) ...[
+              Text(
+                "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
+              ),
+            ] else ...[
               Text(
                 "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
               ),
@@ -125,18 +127,61 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 i < (_mushroom?.suggestions.length ?? 0);
                 i++
               ) ...[
-                SizedBox(height: 8),
+                SizedBox(height: 20),
                 Text(
                   "Suggestion ${i + 1}: ${_mushroom?.suggestions[i].name ?? 'Unknown'}",
                 ),
                 Text(
-                  "Probability: ${(_mushroom?.suggestions[i].probability ?? 0.0).toStringAsFixed(2)}",
+                  "Probability: ${((_mushroom?.suggestions[i].probability ?? 0.0) * 100).toStringAsFixed(2)}%",
                 ),
+
+                // if (_mushroom?.suggestions[i].similarImages == null &&
+                //                     _mushroom!.suggestions[i].similarImages!.any(
+                //                       (images) => false,
+                //                     ))
+
+                // TODO: understand if its worth it to only use this condition instead of the one above
+                // since we used a mock data that may return null for similarImages due to sending true regarding
+                // similar_images property inside of our POST request body
+                if (_mushroom?.suggestions[i].similarImages == null)
+                  ...[]
+                else ...[
+                  Text("Similar Images:"),
+                  Container(
+                    height: 80,
+                    decoration: BoxDecoration(color: Colors.amber),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (
+                            int g = 0;
+                            g <
+                                (_mushroom
+                                        ?.suggestions[0]
+                                        .similarImages!
+                                        .length ??
+                                    0);
+                            g++
+                          ) ...[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(4, 4, 0, 4),
+                              child: Image.network(
+                                _mushroom
+                                        ?.suggestions[i]
+                                        .similarImages![g]
+                                        .image ??
+                                    '',
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ],
-            ] else
-              Text(
-                "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
-              ),
+            ],
           ],
         ),
       ),
@@ -147,6 +192,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        SizedBox(height: 16),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
@@ -172,7 +218,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
             label: Text("Clear"),
             onPressed: () {
               setState(() {
-                _image = null;
+                _selectedImage = null;
               });
             },
           ),

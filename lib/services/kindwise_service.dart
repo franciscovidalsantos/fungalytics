@@ -15,6 +15,7 @@ class KindwiseService {
         headers: {"Content-Type": "application/json", "Api-Key": _apiKey},
         body: jsonEncode({
           "images": [base64Image],
+          "similar_images": true,
         }),
       );
 

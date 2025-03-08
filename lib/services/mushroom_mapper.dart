@@ -1,4 +1,5 @@
 import 'package:fungalytics/models/mushroom_response.dart';
+import 'package:fungalytics/models/mushroom_similar_image.dart';
 import 'package:fungalytics/models/mushroom_suggestion.dart';
 
 class MushroomMapper {
@@ -10,10 +11,20 @@ class MushroomMapper {
     var suggestionsList =
         (json['result']['classification']['suggestions'] as List)
             .map(
-              (s) => MushroomSuggestion(
-                id: s['id'],
-                name: s['name'],
-                probability: s['probability'].toDouble(),
+              (sugestion) => MushroomSuggestion(
+                id: sugestion['id'],
+                name: sugestion['name'],
+                probability: sugestion['probability'].toDouble(),
+                similarImages:
+                    sugestion['similar_images'] == null
+                        ? null
+                        : (sugestion['similar_images'] as List)
+                            .map(
+                              (similarimage) => MushroomSimilarImage(
+                                image: similarimage["url"],
+                              ),
+                            )
+                            .toList(),
               ),
             )
             .toList();

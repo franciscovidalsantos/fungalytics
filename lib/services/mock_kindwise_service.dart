@@ -69,15 +69,6 @@ class MockKindwiseService {
       "created": 1725450241.479987,
       "completed": 1725450241.700537,
     };
-    // final Map<String, dynamic>? result =
-    //     mockResponse['result'] as Map<String, dynamic>?;
-    // final List<dynamic>? suggestions = result?['suggestions'] as List<dynamic>?;
-    // final suggestions = mockResponse['result']['classification']['suggestions'];
-
-    // if (suggestions != null && suggestions.isNotEmpty) {
-    //   final ourMushroom = Mushroom.fromJson(suggestions[0]);
-    //   return ourMushroom;
-    // }
     return MushroomMapper.fromJson(mockResponse);
   }
 }

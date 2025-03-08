@@ -51,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color.fromARGB(255, 109, 50, 50),
       ),
       extendBodyBehindAppBar: true,
-      body: IndexedStack(index: _selectedIndex, children: _pages),
+      body: SafeArea(
+        child: IndexedStack(index: _selectedIndex, children: _pages),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 31, 19, 19),
         selectedItemColor: Colors.white,
