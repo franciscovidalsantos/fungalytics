@@ -10,7 +10,7 @@ class KindwiseService {
 
   Future<MushroomResponse?> identifyMushroom(String base64Image) async {
     try {
-      final response = await http.post(
+      final request = await http.post(
         Uri.parse(_baseUrl),
         headers: {"Content-Type": "application/json", "Api-Key": _apiKey},
         body: jsonEncode({
@@ -18,15 +18,12 @@ class KindwiseService {
           "similar_images": true,
         }),
       );
-
-      if (response.statusCode == 201) {
-        final data = jsonDecode(response.body);
-
-        print(data);
-        return MushroomMapper.fromJson(data);
+      if (request.statusCode == 201) {
+        final response = jsonDecode(request.body);
+        return MushroomMapper.fromJson(response);
       } else {
-        print("Status Code: ${response.statusCode}");
-        print("Body ${response.body}");
+        print("Status Code: ${request.statusCode}");
+        print("Body ${request.body}");
       }
     } catch (e) {
       print("Exception: $e");
