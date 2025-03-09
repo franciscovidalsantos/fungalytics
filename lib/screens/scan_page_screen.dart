@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fungalytics/services/kindwise_service.dart';
 import 'package:fungalytics/services/mock_kindwise_service.dart';
 import 'package:fungalytics/models/mushroom_response.dart';
+import 'package:fungalytics/widgets/suggestions_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ScanPageScreen extends StatefulWidget {
@@ -128,58 +129,10 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 i++
               ) ...[
                 SizedBox(height: 20),
-                Text(
-                  "Suggestion ${i + 1}: ${_mushroom?.suggestions?[i].name ?? 'Unknown'}",
+                SuggestionsWidget(
+                  index: i,
+                  suggestion: _mushroom?.suggestions?[i],
                 ),
-                Text(
-                  "Probability: ${((_mushroom?.suggestions?[i].probability ?? 0.0) * 100).toStringAsFixed(2)}%",
-                ),
-
-                // if (_mushroom?.suggestions[i].similarImages == null &&
-                //                     _mushroom!.suggestions[i].similarImages!.any(
-                //                       (images) => false,
-                //                     ))
-
-                // TODO: understand if its worth it to only use this condition instead of the one above
-                // since we used a mock data that may return null for similarImages due to sending true regarding
-                // similar_images property inside of our POST request body
-                if (_mushroom?.suggestions?[i].similarImages == null)
-                  ...[]
-                else ...[
-                  Text("Similar Images:"),
-                  Container(
-                    height: 80,
-                    decoration: BoxDecoration(color: Colors.amber),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          for (
-                            int g = 0;
-                            g <
-                                (_mushroom
-                                        ?.suggestions?[i]
-                                        .similarImages!
-                                        .length ??
-                                    0);
-                            g++
-                          ) ...[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(4, 4, 0, 4),
-                              child: Image.network(
-                                _mushroom
-                                        ?.suggestions?[i]
-                                        .similarImages![g]
-                                        .image ??
-                                    '',
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
               ],
             ],
           ],
