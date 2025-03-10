@@ -17,6 +17,7 @@ class SuggestionsWidget extends StatefulWidget {
 
 class _SuggestionsWidgetState extends State<SuggestionsWidget> {
   bool _isLoading = false;
+  bool _isChecked = false;
   @override
   void initState() {
     super.initState();
@@ -37,27 +38,45 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Suggestion ${widget.index + 1}: ${widget.suggestion?.name ?? 'Unknown'}",
-        ),
-        Text(
-          "Probability: ${((widget.suggestion?.probability ?? 0.0) * 100).toStringAsFixed(2)}%",
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Suggestion ${widget.index + 1}: ${widget.suggestion?.name ?? 'Unknown'}",
+            ),
+            Switch(
+              value: _isChecked,
+              onChanged: (value) {
+                setState(() {
+                  _isChecked = value;
+                });
+              },
+            ),
+          ],
         ),
 
-        // if (_mushroom?.suggestions[i].similarImages == null &&
-        //                     _mushroom!.suggestions[i].similarImages!.any(
-        //                       (images) => false,
-        //                     ))
+        if (_isChecked) ...[
+          Text(
+            "Probability: ${((widget.suggestion?.probability ?? 0.0) * 100).toStringAsFixed(2)}%",
+          ),
 
-        // TODO: understand if its worth it to only use this condition instead of the one above
-        // since we used a mock data that may return null for similarImages due to sending true regarding
-        // similar_images property inside of our POST request body
-        if (widget.suggestion?.similarImages == null ||
-            widget.suggestion!.similarImages!.isEmpty)
-          ...[]
-        else ...[
-          Text("Similar Images:"),
-          SimilarImagesWidget(similarImages: widget.suggestion?.similarImages),
+          // if (_mushroom?.suggestions[i].similarImages == null &&
+          //                     _mushroom!.suggestions[i].similarImages!.any(
+          //                       (images) => false,
+          //                     ))
+
+          // TODO: understand if its worth it to only use this condition instead of the one above
+          // since we used a mock data that may return null for similarImages due to sending true regarding
+          // similar_images property inside of our POST request body
+          if (widget.suggestion?.similarImages == null ||
+              widget.suggestion!.similarImages!.isEmpty)
+            ...[]
+          else ...[
+            Text("Similar Images:"),
+            SimilarImagesWidget(
+              similarImages: widget.suggestion?.similarImages,
+            ),
+          ],
         ],
       ],
     );
