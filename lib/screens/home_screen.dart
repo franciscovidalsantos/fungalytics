@@ -43,12 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
-            color: Colors.white,
             onPressed: _openSettingsScreen,
           ),
         ],
         title: Text("Fungalytics", style: TextStyle(color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 109, 50, 50),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       extendBodyBehindAppBar: true,
       body: SafeArea(

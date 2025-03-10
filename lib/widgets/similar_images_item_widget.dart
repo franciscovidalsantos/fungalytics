@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fungalytics/models/mushroom_similar_image.dart';
+import 'package:fungalytics/screens/image_screen.dart';
 
 class SimilarImagesItemWidget extends StatefulWidget {
   const SimilarImagesItemWidget({super.key, required this.image});
@@ -27,6 +28,15 @@ class _SimilarImagesItemWidgetState extends State<SimilarImagesItemWidget> {
     }
   }
 
+  void _showImageScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImageScreen(imageUrl: widget.image.url),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return _isLoading
@@ -37,7 +47,11 @@ class _SimilarImagesItemWidgetState extends State<SimilarImagesItemWidget> {
         )
         : Padding(
           padding: const EdgeInsets.fromLTRB(4, 4, 0, 4),
-          child: Image.network(widget.image.url),
+          child: GestureDetector(
+            onTap: () => _showImageScreen(context),
+            onLongPress: () => _showImageScreen(context),
+            child: Image.network(widget.image.url),
+          ),
         );
   }
 }

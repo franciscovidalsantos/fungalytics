@@ -1,3 +1,4 @@
+import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:fungalytics/models/mushroom_similar_image.dart';
 import 'package:fungalytics/widgets/similar_images_item_widget.dart';
@@ -12,6 +13,7 @@ class SimilarImagesWidget extends StatefulWidget {
 
 class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
   bool _isLoading = false;
+  final _controller = ScrollController();
 
   @override
   void initState() {
@@ -35,14 +37,19 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
       children: [
         Container(
           height: 80,
-          decoration: BoxDecoration(color: Colors.amber),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children:
-                  widget.similarImages!.map((image) {
-                    return SimilarImagesItemWidget(image: image);
-                  }).toList(),
+          decoration: BoxDecoration(color: Color.fromARGB(255, 109, 50, 50)),
+          child: FadingEdgeScrollView.fromSingleChildScrollView(
+            gradientFractionOnEnd: 0.1,
+            gradientFractionOnStart: 0.1,
+            child: SingleChildScrollView(
+              controller: _controller,
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                    widget.similarImages!.map((image) {
+                      return SimilarImagesItemWidget(image: image);
+                    }).toList(),
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:fungalytics/services/kindwise_service.dart';
 import 'package:fungalytics/services/mock_kindwise_service.dart';
@@ -21,6 +22,13 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   bool _isLoading = false;
   final _picker = ImagePicker();
   final _kindwiseService = MockKindwiseService();
+  final _scrollViewController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollViewController.dispose();
+    super.dispose();
+  }
 
   // Function to pick an image
   Future<void> _pickImage(ImageSource source) async {
@@ -102,40 +110,45 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
 
   Widget _buildMushroomInfo() {
     return Flexible(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.file(
-              _selectedImage!,
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 20),
-            if (_mushroom?.isMushroom == false) ...[
-              Text(
-                "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
-              ),
-            ] else ...[
-              Text(
-                "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+      child: FadingEdgeScrollView.fromSingleChildScrollView(
+        gradientFractionOnStart: 0.05,
+        gradientFractionOnEnd: 0.05,
+        child: SingleChildScrollView(
+          controller: _scrollViewController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.file(
+                _selectedImage!,
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
               SizedBox(height: 20),
-              Text("Found ${_mushroom?.suggestions?.length} matches:"),
-              for (
-                int i = 0;
-                i < (_mushroom?.suggestions?.length ?? 0);
-                i++
-              ) ...[
-                SizedBox(height: 20),
-                SuggestionsWidget(
-                  index: i,
-                  suggestion: _mushroom?.suggestions?[i],
+              if (_mushroom?.isMushroom == false) ...[
+                Text(
+                  "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
                 ),
+              ] else ...[
+                Text(
+                  "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+                ),
+                SizedBox(height: 20),
+                Text("Found ${_mushroom?.suggestions?.length} matches:"),
+                for (
+                  int i = 0;
+                  i < (_mushroom?.suggestions?.length ?? 0);
+                  i++
+                ) ...[
+                  SizedBox(height: 20),
+                  SuggestionsWidget(
+                    index: i,
+                    suggestion: _mushroom?.suggestions?[i],
+                  ),
+                ],
               ],
             ],
-          ],
+          ),
         ),
       ),
     );
