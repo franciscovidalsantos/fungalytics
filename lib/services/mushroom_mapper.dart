@@ -26,7 +26,7 @@ class MushroomMapper {
                           : (sugestion['similar_images'] as List)
                               .map(
                                 (similarimage) => MushroomSimilarImage(
-                                  image: similarimage["url"],
+                                  url: similarimage["url"],
                                 ),
                               )
                               .toList(),

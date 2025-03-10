@@ -1,5 +1,5 @@
 class MushroomSimilarImage {
-  final String image;
+  final String url;
 
-  MushroomSimilarImage({required this.image});
+  MushroomSimilarImage({required this.url});
 }
