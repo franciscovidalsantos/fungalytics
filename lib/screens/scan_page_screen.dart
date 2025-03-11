@@ -74,12 +74,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
       children: [
         if (_selectedImage == null)
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(child: Text("Pick an image to start scanning.")),
-              ],
-            ),
+            child: Center(child: Text("Pick an image to start scanning.")),
           )
         else
           Expanded(
@@ -91,11 +86,10 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [_buildMushroomInfo()],
                     )
-                    : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Ocurred a problem picking the image, try again"),
-                      ],
+                    : Center(
+                      child: Text(
+                        "Ocurred a problem picking the image, try again",
+                      ),
                     ),
           ),
         _buildImagePickerButtons(),
