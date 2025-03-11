@@ -70,41 +70,36 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-      child: Column(
-        children: [
-          if (_selectedImage == null)
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(child: Text("Pick an image to start scanning.")),
-                ],
-              ),
-            )
-          else
-            Expanded(
-              child:
-                  _isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : _mushroom != null
-                      ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [_buildMushroomInfo()],
-                      )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Ocurred a problem picking the image, try again",
-                          ),
-                        ],
-                      ),
+    return Column(
+      children: [
+        if (_selectedImage == null)
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: Text("Pick an image to start scanning.")),
+              ],
             ),
-          _buildImagePickerButtons(),
-        ],
-      ),
+          )
+        else
+          Expanded(
+            child:
+                _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : _mushroom != null
+                    ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [_buildMushroomInfo()],
+                    )
+                    : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Ocurred a problem picking the image, try again"),
+                      ],
+                    ),
+          ),
+        _buildImagePickerButtons(),
+      ],
     );
   }
 
@@ -115,39 +110,51 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
         gradientFractionOnEnd: 0.05,
         child: SingleChildScrollView(
           controller: _scrollViewController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.file(
-                _selectedImage!,
-                height: 300,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 20),
-              if (_mushroom?.isMushroom == false) ...[
-                Text(
-                  "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
-                ),
-              ] else ...[
-                Text(
-                  "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Card(
+                  clipBehavior: Clip.hardEdge,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Image.file(
+                    _selectedImage!,
+                    height:
+                        MediaQuery.of(context).size.height /
+                        3, // screen size divided by 3
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 SizedBox(height: 20),
-                Text("Found ${_mushroom?.suggestions?.length} matches:"),
-                for (
-                  int i = 0;
-                  i < (_mushroom?.suggestions?.length ?? 0);
-                  i++
-                ) ...[
-                  SizedBox(height: 20),
-                  SuggestionsWidget(
-                    index: i,
-                    suggestion: _mushroom?.suggestions?[i],
+                if (_mushroom?.isMushroom == false) ...[
+                  Text(
+                    "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
                   ),
+                ] else ...[
+                  Text(
+                    "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+                  ),
+                  SizedBox(height: 20),
+                  Text("Found ${_mushroom?.suggestions?.length} matches:"),
+                  for (
+                    int i = 0;
+                    i < (_mushroom?.suggestions?.length ?? 0);
+                    i++
+                  ) ...[
+                    SizedBox(height: 8),
+                    SuggestionsWidget(
+                      index: i,
+                      suggestion: _mushroom?.suggestions?[i],
+                    ),
+                  ],
                 ],
               ],
-            ],
+            ),
           ),
         ),
       ),
@@ -155,41 +162,43 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   }
 
   Widget _buildImagePickerButtons() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            icon: Icon(Icons.image),
-            label: Text("Gallery"),
-            onPressed: () => _pickImage(ImageSource.gallery),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              icon: Icon(Icons.image),
+              label: Text("Gallery"),
+              onPressed: () => _pickImage(ImageSource.gallery),
+            ),
           ),
-        ),
-        // SizedBox(height: 16),
-        // SizedBox(
-        //   width: double.infinity,
-        //   child: ElevatedButton.icon(
-        //     icon: Icon(Icons.camera_alt),
-        //     label: Text("Camera"),
-        //     onPressed: () => _pickImage(ImageSource.camera),
-        //   ),
-        // ),
-        SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            icon: Icon(Icons.restart_alt),
-            label: Text("Clear"),
-            onPressed: () {
-              setState(() {
-                _selectedImage = null;
-              });
-            },
+          // SizedBox(height: 16),
+          // SizedBox(
+          //   width: double.infinity,
+          //   child: ElevatedButton.icon(
+          //     icon: Icon(Icons.camera_alt),
+          //     label: Text("Camera"),
+          //     onPressed: () => _pickImage(ImageSource.camera),
+          //   ),
+          // ),
+          SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              icon: Icon(Icons.restart_alt),
+              label: Text("Clear"),
+              onPressed: () {
+                setState(() {
+                  _selectedImage = null;
+                });
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
