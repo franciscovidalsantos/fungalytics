@@ -35,9 +35,8 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           height: 80,
-          decoration: BoxDecoration(color: Color.fromARGB(255, 109, 50, 50)),
           child: FadingEdgeScrollView.fromSingleChildScrollView(
             gradientFractionOnEnd: 0.1,
             gradientFractionOnStart: 0.1,

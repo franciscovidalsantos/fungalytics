@@ -140,7 +140,6 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                     i < (_mushroom?.suggestions?.length ?? 0);
                     i++
                   ) ...[
-                    SizedBox(height: 8),
                     SuggestionsWidget(
                       index: i,
                       suggestion: _mushroom?.suggestions?[i],

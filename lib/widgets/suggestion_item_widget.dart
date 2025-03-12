@@ -78,6 +78,7 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
             ),
           ],
         ],
+        Divider(),
       ],
     );
   }

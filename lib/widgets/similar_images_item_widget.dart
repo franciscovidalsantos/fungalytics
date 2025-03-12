@@ -45,11 +45,15 @@ class _SimilarImagesItemWidgetState extends State<SimilarImagesItemWidget> {
           height: 80,
           child: Center(child: CircularProgressIndicator()),
         )
-        : Padding(
-          padding: const EdgeInsets.fromLTRB(4, 4, 0, 4),
-          child: GestureDetector(
-            onTap: () => _showImageScreen(context),
-            onLongPress: () => _showImageScreen(context),
+        : GestureDetector(
+          onTap: () => _showImageScreen(context),
+          onLongPress: () => _showImageScreen(context),
+          child: Card(
+            clipBehavior: Clip.hardEdge,
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Image.network(widget.image.url),
           ),
         );
