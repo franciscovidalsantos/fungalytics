@@ -52,6 +52,7 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
             ),
           ),
         ),
+        SizedBox(height: 8),
       ],
     );
   }

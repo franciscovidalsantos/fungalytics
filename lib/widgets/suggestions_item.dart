@@ -78,7 +78,6 @@ class _SuggestionsItemState extends State<SuggestionsItem> {
             ),
           ],
         ],
-        Divider(),
       ],
     );
   }
