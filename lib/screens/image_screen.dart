@@ -8,19 +8,13 @@ class ImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 109, 50, 50),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: Center(
           child: Card(
             clipBehavior: Clip.hardEdge,
             elevation: 10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
             child: Stack(
               children: [
                 Image.network(

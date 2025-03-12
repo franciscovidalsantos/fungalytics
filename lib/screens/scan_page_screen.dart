@@ -112,9 +112,6 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 Card(
                   clipBehavior: Clip.hardEdge,
                   elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
                   child: Image.file(
                     _selectedImage!,
                     height:

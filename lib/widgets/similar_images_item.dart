@@ -50,9 +50,6 @@ class _SimilarImagesItemState extends State<SimilarImagesItem> {
           child: Card(
             clipBehavior: Clip.hardEdge,
             elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
             child: Image.network(widget.image.url),
           ),
         );

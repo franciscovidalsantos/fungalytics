@@ -46,18 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: _openSettingsScreen,
           ),
         ],
-        title: Text("Fungalytics", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 109, 50, 50),
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text("Fungalytics"),
       ),
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: IndexedStack(index: _selectedIndex, children: _pages),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 31, 19, 19),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white30,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.lens_blur_outlined),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fungalytics/screens/home_screen.dart';
+import 'package:fungalytics/theme/fungalytics_theme.dart';
 
 void main() {
   runApp(const FungalyticsApp());
@@ -10,6 +11,11 @@ class FungalyticsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeScreen());
+    return MaterialApp(
+      theme: FungalyticsTheme.lightTheme,
+      darkTheme: FungalyticsTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: HomeScreen(),
+    );
   }
 }
