@@ -1,7 +1,7 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:fungalytics/models/mushroom_similar_image.dart';
-import 'package:fungalytics/widgets/similar_images_item_widget.dart';
+import 'package:fungalytics/widgets/similar_images_item.dart';
 
 class SimilarImagesWidget extends StatefulWidget {
   const SimilarImagesWidget({super.key, required this.similarImages});
@@ -46,7 +46,7 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
               child: Row(
                 children:
                     widget.similarImages!.map((image) {
-                      return SimilarImagesItemWidget(image: image);
+                      return SimilarImagesItem(image: image);
                     }).toList(),
               ),
             ),

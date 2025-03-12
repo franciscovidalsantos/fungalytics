@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fungalytics/models/mushroom_suggestion.dart';
 import 'package:fungalytics/widgets/similar_images_widget.dart';
 
-class SuggestionsWidget extends StatefulWidget {
-  const SuggestionsWidget({
+class SuggestionsItem extends StatefulWidget {
+  const SuggestionsItem({
     super.key,
     required this.index,
     required this.suggestion,
@@ -12,10 +12,10 @@ class SuggestionsWidget extends StatefulWidget {
   final int index;
 
   @override
-  State<SuggestionsWidget> createState() => _SuggestionsWidgetState();
+  State<SuggestionsItem> createState() => _SuggestionsItemState();
 }
 
-class _SuggestionsWidgetState extends State<SuggestionsWidget> {
+class _SuggestionsItemState extends State<SuggestionsItem> {
   bool _isLoading = false;
   bool _isChecked = false;
   @override

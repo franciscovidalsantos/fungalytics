@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fungalytics/services/kindwise_service.dart';
 import 'package:fungalytics/services/mock_kindwise_service.dart';
 import 'package:fungalytics/models/mushroom_response.dart';
-import 'package:fungalytics/widgets/suggestion_item_widget.dart';
+import 'package:fungalytics/widgets/suggestions_item.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ScanPageScreen extends StatefulWidget {
@@ -140,7 +140,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                     i < (_mushroom?.suggestions?.length ?? 0);
                     i++
                   ) ...[
-                    SuggestionsWidget(
+                    SuggestionsItem(
                       index: i,
                       suggestion: _mushroom?.suggestions?[i],
                     ),
