@@ -43,6 +43,9 @@ class FungalyticsTheme {
       ),
       // trackOutlineColor manages the border color
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: const Color.fromARGB(255, 109, 50, 50),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -87,5 +90,7 @@ class FungalyticsTheme {
       ),
       // trackOutlineColor manages the border color
     ),
+
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),
   );
 }
