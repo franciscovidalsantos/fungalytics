@@ -15,7 +15,16 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
     return Column(
       children: [
         for (int i = 0; i < (widget.suggestions?.length ?? 0); i++) ...[
-          SuggestionsItem(index: i, suggestion: widget.suggestions?[i]),
+          Row(
+            children: [
+              Expanded(
+                child: SuggestionsItem(
+                  index: i,
+                  suggestion: widget.suggestions?[i],
+                ),
+              ),
+            ],
+          ),
           if (i != (widget.suggestions?.length)! - 1)
             Divider(), // last item wont need a divider
         ],

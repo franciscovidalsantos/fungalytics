@@ -36,23 +36,25 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 80,
           child: FadingEdgeScrollView.fromSingleChildScrollView(
             gradientFractionOnEnd: 0.1,
             gradientFractionOnStart: 0.1,
             child: SingleChildScrollView(
               controller: _controller,
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                    widget.similarImages!.map((image) {
-                      return SimilarImagesItem(image: image);
-                    }).toList(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
+                child: Row(
+                  spacing: 4,
+                  children:
+                      widget.similarImages!
+                          .map((image) => SimilarImagesItem(image: image))
+                          .toList(),
+                ),
               ),
             ),
           ),
         ),
-        SizedBox(height: 8),
       ],
     );
   }

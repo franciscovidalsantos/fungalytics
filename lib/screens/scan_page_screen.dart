@@ -123,15 +123,33 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 ),
                 SizedBox(height: 20),
                 if (_mushroom?.isMushroom == false) ...[
-                  Text(
-                    "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 4),
+                      Text(
+                        "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
+                      ),
+                    ],
                   ),
                 ] else ...[
-                  Text(
-                    "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+                  Row(
+                    children: [
+                      SizedBox(width: 4),
+                      Text(
+                        "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+                      ),
+                    ],
                   ),
                   SizedBox(height: 20),
-                  Text("Found ${_mushroom?.suggestions?.length} matches:"),
+                  Row(
+                    children: [
+                      SizedBox(width: 4),
+                      Text(
+                        "Found ${_mushroom?.suggestions?.length} suggestions:",
+                      ),
+                    ],
+                  ),
                   SizedBox(height: 8),
                   SuggestionsWidget(suggestions: _mushroom?.suggestions),
                 ],

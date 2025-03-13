@@ -38,20 +38,21 @@ class _SimilarImagesItemState extends State<SimilarImagesItem> {
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading
-        ? SizedBox(
-          width: 80,
-          height: 80,
-          child: Center(child: CircularProgressIndicator()),
-        )
-        : GestureDetector(
-          onTap: () => _showImageScreen(context),
-          onLongPress: () => _showImageScreen(context),
-          child: Card(
-            clipBehavior: Clip.hardEdge,
-            elevation: 5,
-            child: Image.network(widget.image.url),
-          ),
-        );
+    return SizedBox(
+      width: 100,
+      height: 100,
+      child:
+          _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : GestureDetector(
+                onTap: () => _showImageScreen(context),
+                // onLongPress: () => _showImageScreen(context),
+                child: Card(
+                  clipBehavior: Clip.hardEdge,
+                  elevation: 5,
+                  child: Image.network(widget.image.url),
+                ),
+              ),
+    );
   }
 }
