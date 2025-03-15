@@ -23,6 +23,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   final _picker = ImagePicker();
   final _kindwiseService = MockKindwiseService();
   final _scrollViewController = ScrollController();
+  bool _wasShowButtonClicked = false;
 
   @override
   void dispose() {
@@ -36,7 +37,8 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
-        _mushroom = null; // Reset result
+        _mushroom = null; // reset result
+        _wasShowButtonClicked = false; // reset showButton
       });
       _identifyMushroom();
     }
@@ -124,7 +126,6 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                 SizedBox(height: 20),
                 if (_mushroom?.isMushroom == false) ...[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(width: 4),
                       Text(
@@ -132,6 +133,8 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 20),
+                  _buildPossibleSuggestions(),
                 ] else ...[
                   Row(
                     children: [
@@ -171,7 +174,10 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
             width: double.infinity,
             child: ElevatedButton.icon(
               icon: Icon(Icons.image),
-              label: Text("Gallery"),
+              label: Text(
+                "Gallery",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               onPressed: () => _pickImage(ImageSource.gallery),
             ),
           ),
@@ -180,7 +186,10 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
           //   width: double.infinity,
           //   child: ElevatedButton.icon(
           //     icon: Icon(Icons.camera_alt),
-          //     label: Text("Camera"),
+          //     label: Text(
+          //       "Camera",
+          //       style: TextStyle(fontWeight: FontWeight.bold),
+          //     ),
           //     onPressed: () => _pickImage(ImageSource.camera),
           //   ),
           // ),
@@ -189,16 +198,49 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
             width: double.infinity,
             child: ElevatedButton.icon(
               icon: Icon(Icons.restart_alt),
-              label: Text("Clear"),
-              onPressed: () {
-                setState(() {
-                  _selectedImage = null;
-                });
-              },
+              label: Text(
+                "Clear",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () => setState(() => _selectedImage = null),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildPossibleSuggestions() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (!_wasShowButtonClicked) ...[
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              icon: Icon(Icons.lightbulb),
+              label: Text(
+                "Show",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () => setState(() => _wasShowButtonClicked = true),
+            ),
+          ),
+        ] else ...[
+          Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 4),
+                  Text("Found ${_mushroom?.suggestions?.length} suggestions:"),
+                ],
+              ),
+              SizedBox(height: 8),
+              SuggestionsWidget(suggestions: _mushroom?.suggestions),
+            ],
+          ),
+        ],
+      ],
     );
   }
 }

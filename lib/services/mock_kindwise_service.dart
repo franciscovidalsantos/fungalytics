@@ -8,8 +8,7 @@ class MockKindwiseService {
     await Future.delayed(Duration(seconds: 2)); // simulate network delay
 
     // change MockResponses enum value to test different types of response
-    final response =
-        MockResponses.withMultipleSuggestionsAndNoSimilarImages.response;
+    final response = MockResponses.notAMushroomWithSuggestions.response;
 
     return MushroomMapper.fromJson(response);
   }
@@ -17,7 +16,7 @@ class MockKindwiseService {
 
 enum MockResponses {
   // removed "input" from all the responses since it's not needed
-  withFewSuggestions({
+  aMushroomwithFewSuggestions({
     "result": {
       "classification": {
         "suggestions": [
@@ -99,7 +98,7 @@ enum MockResponses {
     "created": 1741465310.290852,
     "completed": 1741465310.43274,
   }),
-  withMultipleSuggestions({
+  aMushroomwithMultipleSuggestions({
     "result": {
       "classification": {
         "suggestions": [
@@ -431,7 +430,7 @@ enum MockResponses {
     "created": 1741421080.607858,
     "completed": 1741421080.838342,
   }),
-  withMultipleSuggestionsAndMultipleSimilarImages({
+  aMushroomwithMultipleSuggestionsAndMultipleSimilarImages({
     "result": {
       "classification": {
         "suggestions": [
@@ -1327,7 +1326,7 @@ enum MockResponses {
     "created": 1741421080.607858,
     "completed": 1741421080.838342,
   }),
-  withMultipleSuggestionsAndNoSimilarImages({
+  aMushroomwithMultipleSuggestionsAndNoSimilarImages({
     "result": {
       "classification": {
         "suggestions": [
@@ -1404,6 +1403,344 @@ enum MockResponses {
     "sla_compliant_system": true,
     "created": 1741148678.986464,
     "completed": 1741148679.241525,
+  }),
+  notAMushroomWithSuggestions({
+    "result": {
+      "classification": {
+        "suggestions": [
+          {
+            "id": "1c7099a270c50c15",
+            "name": "Coprinus comatus",
+            "probability": 0.2885,
+            "similar_images": [
+              {
+                "id": "689f8c1e2763440097a99817a697b54a83dc980e",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/689/f8c1e2763440097a99817a697b54a83dc980e.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Mariah K. Rogers",
+                "similarity": 0.451,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/689/f8c1e2763440097a99817a697b54a83dc980e.small.jpg",
+              },
+              {
+                "id": "986c7fbf1b127184ecdc95fdec6bda91b611e9d5",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/986/c7fbf1b127184ecdc95fdec6bda91b611e9d5.jpeg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Kalle Rainio",
+                "similarity": 0.422,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/986/c7fbf1b127184ecdc95fdec6bda91b611e9d5.small.jpeg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "1c7099a270c50c15"},
+          },
+          {
+            "id": "509e11b658e98f03",
+            "name": "Amanita muscaria",
+            "probability": 0.0857,
+            "similar_images": [
+              {
+                "id": "f0c6a8645d6630f5d3614fb905d3d6e4f2da3796",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/f0c/6a8645d6630f5d3614fb905d3d6e4f2da3796.jpeg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Stephen Hodges",
+                "similarity": 0.367,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/f0c/6a8645d6630f5d3614fb905d3d6e4f2da3796.small.jpeg",
+              },
+              {
+                "id": "be74468cafc58acb09894d8b6c84e9dba775abfc",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/be7/4468cafc58acb09894d8b6c84e9dba775abfc.jpeg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "cowcornerman",
+                "similarity": 0.363,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/be7/4468cafc58acb09894d8b6c84e9dba775abfc.small.jpeg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "509e11b658e98f03"},
+          },
+          {
+            "id": "0bff716ed14e21fc",
+            "name": "Chlorophyllum molybdites",
+            "probability": 0.0501,
+            "similar_images": [
+              {
+                "id": "9874a87276d43bffaaaad10b7fa771ae0a5f4d30",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/987/4a87276d43bffaaaad10b7fa771ae0a5f4d30.jpeg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "andytt1029",
+                "similarity": 0.498,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/987/4a87276d43bffaaaad10b7fa771ae0a5f4d30.small.jpeg",
+              },
+              {
+                "id": "4397a941c98d5ff9f6993cc0f78773750f2a7265",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/439/7a941c98d5ff9f6993cc0f78773750f2a7265.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Nhu Nguyen",
+                "similarity": 0.471,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/439/7a941c98d5ff9f6993cc0f78773750f2a7265.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "0bff716ed14e21fc"},
+          },
+          {
+            "id": "abed590145820a06",
+            "name": "Calvatia gigantea",
+            "probability": 0.042,
+            "similar_images": [
+              {
+                "id": "1afc3849b789027a6cc8d6630c0ea9e8faa4018b",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1af/c3849b789027a6cc8d6630c0ea9e8faa4018b.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Linda Roskam-Schultinge",
+                "similarity": 0.46,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1af/c3849b789027a6cc8d6630c0ea9e8faa4018b.small.jpg",
+              },
+              {
+                "id": "1dce5b8fa55656801c508c4875a8bb654ae5163b",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1dc/e5b8fa55656801c508c4875a8bb654ae5163b.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Bregtje Miedema",
+                "similarity": 0.435,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1dc/e5b8fa55656801c508c4875a8bb654ae5163b.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "abed590145820a06"},
+          },
+          {
+            "id": "720b7901d4b9a708",
+            "name": "Macrolepiota procera",
+            "probability": 0.0366,
+            "similar_images": [
+              {
+                "id": "ce9c45cd347286d3328cd348431b8cf157938bdb",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/ce9/c45cd347286d3328cd348431b8cf157938bdb.jpeg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Paco Bergson",
+                "similarity": 0.358,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/ce9/c45cd347286d3328cd348431b8cf157938bdb.small.jpeg",
+              },
+              {
+                "id": "b84d6f75395cc5d386ea9ba2d70f3735d32d4b15",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/b84/d6f75395cc5d386ea9ba2d70f3735d32d4b15.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "stigdebois",
+                "similarity": 0.319,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/b84/d6f75395cc5d386ea9ba2d70f3735d32d4b15.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "720b7901d4b9a708"},
+          },
+          {
+            "id": "42a7ee30fa4d2880",
+            "name": "Lycoperdon excipuliforme",
+            "probability": 0.0307,
+            "similar_images": [
+              {
+                "id": "3c7e9cde5cfbd6aed163e7151392c9ee7ef5b9ca",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/3c7/e9cde5cfbd6aed163e7151392c9ee7ef5b9ca.jpg",
+                "license_name": "CC0",
+                "license_url":
+                    "https://creativecommons.org/publicdomain/zero/1.0/",
+                "citation": "Bo Brinkhoff",
+                "similarity": 0.382,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/3c7/e9cde5cfbd6aed163e7151392c9ee7ef5b9ca.small.jpg",
+              },
+              {
+                "id": "82a3765e1ae006cde0c9b89ab84edff0a89dc8fb",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/82a/3765e1ae006cde0c9b89ab84edff0a89dc8fb.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "samanthareed",
+                "similarity": 0.336,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/82a/3765e1ae006cde0c9b89ab84edff0a89dc8fb.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "42a7ee30fa4d2880"},
+          },
+          {
+            "id": "9c23fc84e382d9b0",
+            "name": "Xanthoria elegans",
+            "probability": 0.0255,
+            "similar_images": [
+              {
+                "id": "caf565f04af22e683253416d4b37ccd17f0e8a4d",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/caf/565f04af22e683253416d4b37ccd17f0e8a4d.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "rt23",
+                "similarity": 0.356,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/caf/565f04af22e683253416d4b37ccd17f0e8a4d.small.jpg",
+              },
+              {
+                "id": "77e523be40bba7395f03fc50154479e19e5b3e42",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/77e/523be40bba7395f03fc50154479e19e5b3e42.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "lkitrell",
+                "similarity": 0.288,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/77e/523be40bba7395f03fc50154479e19e5b3e42.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "9c23fc84e382d9b0"},
+          },
+          {
+            "id": "bb3ea3e4c691f036",
+            "name": "Marasmius oreades",
+            "probability": 0.0255,
+            "similar_images": [
+              {
+                "id": "c34c4f4dd8d0e5128cfc521de64c3574214e0123",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/c34/c4f4dd8d0e5128cfc521de64c3574214e0123.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Twan Martens",
+                "similarity": 0.548,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/c34/c4f4dd8d0e5128cfc521de64c3574214e0123.small.jpg",
+              },
+              {
+                "id": "1cc48049e4aaca03b1608bf56b288568720d233f",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1cc/48049e4aaca03b1608bf56b288568720d233f.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Thijs van der Zanden",
+                "similarity": 0.5,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1cc/48049e4aaca03b1608bf56b288568720d233f.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "bb3ea3e4c691f036"},
+          },
+          {
+            "id": "b1d191d8c9f0aeed",
+            "name": "Morchella semilibera",
+            "probability": 0.0217,
+            "similar_images": [
+              {
+                "id": "fc5ecf4037a208c69fbd0211fcee150f53692e43",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/fc5/ecf4037a208c69fbd0211fcee150f53692e43.jpg",
+                "license_name": "CC BY-NC 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc/4.0/",
+                "citation": "Bjarne Nielsen",
+                "similarity": 0.355,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/fc5/ecf4037a208c69fbd0211fcee150f53692e43.small.jpg",
+              },
+              {
+                "id": "1ce3b43caef3765806690560f9884f5648a2502b",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1ce/3b43caef3765806690560f9884f5648a2502b.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Richardina Niewold",
+                "similarity": 0.307,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/1ce/3b43caef3765806690560f9884f5648a2502b.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "b1d191d8c9f0aeed"},
+          },
+          {
+            "id": "794a79b768c5e03c",
+            "name": "Volvopluteus gloiocephalus",
+            "probability": 0.0214,
+            "similar_images": [
+              {
+                "id": "ec3cf21b1c8532cd587c4900ad829a4b4742234d",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/ec3/cf21b1c8532cd587c4900ad829a4b4742234d.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Harry Verkerk, GDA",
+                "similarity": 0.426,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/ec3/cf21b1c8532cd587c4900ad829a4b4742234d.small.jpg",
+              },
+              {
+                "id": "6f1fcf2299a9d8acaf3696f74b87b8db173323e4",
+                "url":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/6f1/fcf2299a9d8acaf3696f74b87b8db173323e4.jpg",
+                "license_name": "CC BY-NC-ND 4.0",
+                "license_url":
+                    "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                "citation": "Frank de Smalen",
+                "similarity": 0.423,
+                "url_small":
+                    "https://mushroom-id.ams3.cdn.digitaloceanspaces.com/similar_images/2/6f1/fcf2299a9d8acaf3696f74b87b8db173323e4.small.jpg",
+              },
+            ],
+            "details": {"language": "en", "entity_id": "794a79b768c5e03c"},
+          },
+        ],
+      },
+      "is_mushroom": {
+        "probability": 0.11719589,
+        "threshold": 0.4,
+        "binary": false,
+      },
+    },
+    "status": "COMPLETED",
+    "sla_compliant_client": true,
+    "sla_compliant_system": true,
+    "created": 1742055618.142482,
+    "completed": 1742055618.348067,
   });
 
   final Map<String, dynamic> response;

@@ -27,6 +27,16 @@ class FungalyticsTheme {
         iconColor: Colors.white,
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(
+          color: const Color.fromARGB(255, 109, 50, 50),
+          width: 2,
+        ),
+        foregroundColor: const Color.fromARGB(255, 109, 50, 50),
+        iconColor: const Color.fromARGB(255, 109, 50, 50),
+      ),
+    ),
 
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith<Color?>(
@@ -70,6 +80,16 @@ class FungalyticsTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromARGB(255, 109, 50, 50),
+        foregroundColor: Colors.white,
+        iconColor: Colors.white,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(
+          color: const Color.fromARGB(255, 109, 50, 50),
+          width: 2,
+        ),
         foregroundColor: Colors.white,
         iconColor: Colors.white,
       ),
