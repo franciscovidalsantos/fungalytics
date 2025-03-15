@@ -30,24 +30,37 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _resetPageState() {
+    // reset page state when we want to load a new image
+    setState(() => _pages[0] = ScanPageScreen(key: UniqueKey()));
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  Widget _appBarButton() {
+    // TODO add a switch case to manage the navigation bar
+    // items in case we have a 3rd state to Collection page
+    IconButton selectedButton =
+        _selectedIndex == 0
+            ? IconButton(
+              icon: Icon(Icons.restart_alt),
+              onPressed: _resetPageState,
+            )
+            : IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: _openSettingsScreen,
+            );
+    return selectedButton;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: _openSettingsScreen,
-          ),
-        ],
-        title: Text("Fungalytics"),
-      ),
+      appBar: AppBar(actions: [_appBarButton()], title: Text("Fungalytics")),
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: IndexedStack(index: _selectedIndex, children: _pages),

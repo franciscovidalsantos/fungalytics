@@ -173,6 +173,18 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
+              icon: Icon(Icons.camera_alt),
+              label: Text(
+                "Camera",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () => _pickImage(ImageSource.camera),
+            ),
+          ),
+          SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
               icon: Icon(Icons.image),
               label: Text(
                 "Gallery",
@@ -181,30 +193,18 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
               onPressed: () => _pickImage(ImageSource.gallery),
             ),
           ),
-          // SizedBox(height: 16),
+          // SizedBox(height: 8),
           // SizedBox(
           //   width: double.infinity,
           //   child: ElevatedButton.icon(
-          //     icon: Icon(Icons.camera_alt),
+          //     icon: Icon(Icons.restart_alt),
           //     label: Text(
-          //       "Camera",
+          //       "Clear",
           //       style: TextStyle(fontWeight: FontWeight.bold),
           //     ),
-          //     onPressed: () => _pickImage(ImageSource.camera),
+          //     onPressed: () => setState(() => _selectedImage = null),
           //   ),
           // ),
-          SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              icon: Icon(Icons.restart_alt),
-              label: Text(
-                "Clear",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              onPressed: () => setState(() => _selectedImage = null),
-            ),
-          ),
         ],
       ),
     );
