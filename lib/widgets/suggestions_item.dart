@@ -16,22 +16,7 @@ class SuggestionsItem extends StatefulWidget {
 }
 
 class _SuggestionsItemState extends State<SuggestionsItem> {
-  bool _isLoading = false;
   bool _isChecked = false;
-  @override
-  void initState() {
-    super.initState();
-    // _setLoading(); // Start loading when widget is created
-  }
-
-  Future<void> _setLoading() async {
-    setState(() => _isLoading = true);
-    try {
-      await Future.delayed(Duration(seconds: 2));
-    } finally {
-      setState(() => _isLoading = false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

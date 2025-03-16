@@ -17,23 +17,7 @@ class SimilarImagesWidget extends StatefulWidget {
 }
 
 class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
-  bool _isLoading = false;
   final _controller = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    // _setLoading(); // Start loading when widget is created
-  }
-
-  Future<void> _setLoading() async {
-    setState(() => _isLoading = true);
-    try {
-      await Future.delayed(Duration(seconds: 2));
-    } finally {
-      setState(() => _isLoading = false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
