@@ -3,8 +3,13 @@ import 'package:fungalytics/models/mushroom_similar_image.dart';
 import 'package:fungalytics/screens/image_screen.dart';
 
 class SimilarImagesItem extends StatefulWidget {
-  const SimilarImagesItem({super.key, required this.image});
+  const SimilarImagesItem({
+    super.key,
+    required this.image,
+    required this.suggestionName,
+  });
   final MushroomSimilarImage image;
+  final String suggestionName;
   @override
   State<SimilarImagesItem> createState() => _SimilarImagesItemState();
 }
@@ -31,7 +36,11 @@ class _SimilarImagesItemState extends State<SimilarImagesItem> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ImageScreen(imageUrl: widget.image.url),
+        builder:
+            (context) => ImageScreen(
+              imageUrl: widget.image.url,
+              suggestionName: widget.suggestionName,
+            ),
       ),
     );
   }

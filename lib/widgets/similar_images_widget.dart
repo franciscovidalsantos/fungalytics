@@ -4,8 +4,13 @@ import 'package:fungalytics/models/mushroom_similar_image.dart';
 import 'package:fungalytics/widgets/similar_images_item.dart';
 
 class SimilarImagesWidget extends StatefulWidget {
-  const SimilarImagesWidget({super.key, required this.similarImages});
+  const SimilarImagesWidget({
+    super.key,
+    required this.similarImages,
+    required this.suggestionName,
+  });
   final List<MushroomSimilarImage>? similarImages;
+  final String suggestionName;
 
   @override
   State<SimilarImagesWidget> createState() => _SimilarImagesWidgetState();
@@ -48,7 +53,12 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
                   spacing: 4,
                   children:
                       widget.similarImages!
-                          .map((image) => SimilarImagesItem(image: image))
+                          .map(
+                            (image) => SimilarImagesItem(
+                              image: image,
+                              suggestionName: widget.suggestionName,
+                            ),
+                          )
                           .toList(),
                 ),
               ),

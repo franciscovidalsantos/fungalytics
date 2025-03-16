@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class ImageScreen extends StatelessWidget {
   final String imageUrl;
+  final String suggestionName;
 
-  const ImageScreen({super.key, required this.imageUrl});
+  const ImageScreen({
+    super.key,
+    required this.imageUrl,
+    required this.suggestionName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class ImageScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                     child: Center(
                       child: Text(
-                        "Mushroom species",
+                        suggestionName,
                         style: TextStyle(color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                       ),

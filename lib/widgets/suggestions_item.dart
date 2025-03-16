@@ -88,6 +88,7 @@ class _SuggestionsItemState extends State<SuggestionsItem> {
                   SizedBox(height: 8),
                   SimilarImagesWidget(
                     similarImages: widget.suggestion?.similarImages,
+                    suggestionName: widget.suggestion!.name,
                   ),
                 ],
               ],
