@@ -74,11 +74,12 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (_selectedImage == null)
+        if (_selectedImage == null) ...[
           Expanded(
             child: Center(child: Text("Pick an image to start scanning.")),
-          )
-        else
+          ),
+          _buildImagePickerButtons(),
+        ] else
           Expanded(
             child:
                 _isLoading
@@ -88,13 +89,19 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [_buildMushroomInfo()],
                     )
-                    : Center(
-                      child: Text(
-                        "Ocurred a problem picking the image, try again",
-                      ),
+                    : Column(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              "Ocurred a problem picking the image, try again",
+                            ),
+                          ),
+                        ),
+                        _buildImagePickerButtons(),
+                      ],
                     ),
           ),
-        _buildImagePickerButtons(),
       ],
     );
   }
