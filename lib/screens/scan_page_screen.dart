@@ -124,38 +124,17 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                if (_mushroom?.isMushroom == false) ...[
-                  Row(
-                    children: [
-                      SizedBox(width: 4),
-                      Text(
-                        "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty",
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  _buildPossibleSuggestions(),
-                ] else ...[
-                  Row(
-                    children: [
-                      SizedBox(width: 4),
-                      Text(
-                        "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      SizedBox(width: 4),
-                      Text(
-                        "Found ${_mushroom?.suggestions?.length} suggestions:",
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  SuggestionsWidget(suggestions: _mushroom?.suggestions),
-                ],
+                Row(
+                  children: [
+                    SizedBox(width: 4),
+                    Text(
+                      _mushroom?.isMushroom == false
+                          ? "Mushroom not detected with ${((1 - (_mushroom?.isMushroomProbability ?? 0.0)) * 100).toStringAsFixed(2)}% certainty."
+                          : "Mushroom detected with ${((_mushroom?.isMushroomProbability ?? 0.0) * 100).toStringAsFixed(2)}% certainty.",
+                    ),
+                  ],
+                ),
+                _buildSuggestions(),
               ],
             ),
           ),
@@ -210,11 +189,11 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
     );
   }
 
-  Widget _buildPossibleSuggestions() {
+  Widget _buildSuggestions() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (!_wasShowButtonClicked) ...[
+        SizedBox(height: 20),
+        if (_mushroom?.isMushroom == false && !_wasShowButtonClicked) ...[
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
@@ -227,18 +206,14 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
             ),
           ),
         ] else ...[
-          Column(
+          Row(
             children: [
-              Row(
-                children: [
-                  SizedBox(width: 4),
-                  Text("Found ${_mushroom?.suggestions?.length} suggestions:"),
-                ],
-              ),
-              SizedBox(height: 8),
-              SuggestionsWidget(suggestions: _mushroom?.suggestions),
+              SizedBox(width: 4),
+              Text("Found ${_mushroom?.suggestions?.length} suggestions:"),
             ],
           ),
+          SizedBox(height: 8),
+          SuggestionsWidget(suggestions: _mushroom?.suggestions),
         ],
       ],
     );
