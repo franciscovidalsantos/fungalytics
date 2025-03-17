@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _resetPageState() {
-    // reset page state when we want to load a new image
+    // Reset page state when we want to load a new image
     setState(() => _pages[0] = ScanPageScreen(key: UniqueKey()));
   }
 
@@ -42,8 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _appBarButton() {
-    // TODO add a switch case to manage the navigation bar
-    // items in case we have a 3rd state to Collection page
     IconButton selectedButton =
         _selectedIndex == 0
             ? IconButton(

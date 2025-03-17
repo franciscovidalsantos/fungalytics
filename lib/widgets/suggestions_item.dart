@@ -31,7 +31,6 @@ class _SuggestionsItemState extends State<SuggestionsItem> {
               Expanded(
                 child: Text(
                   widget.suggestion.name,
-                  // "Suggestion ${widget.index + 1}: ${widget.suggestion!.name}",
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

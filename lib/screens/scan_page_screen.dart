@@ -21,7 +21,8 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
   MushroomResponse? _mushroom;
   bool _isLoading = false;
   final _picker = ImagePicker();
-  final _kindwiseService = MockKindwiseService();
+  final _kindwiseService =
+      MockKindwiseService(); // Switch between the service and its mock version
   final _scrollViewController = ScrollController();
   bool _wasShowButtonClicked = false;
 
@@ -31,14 +32,16 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
     super.dispose();
   }
 
-  // Function to pick an image
+  // Pick image
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
-        _mushroom = null; // reset result
-        _wasShowButtonClicked = false; // reset showButton
+
+        // Reset previous values
+        _mushroom = null;
+        _wasShowButtonClicked = false;
       });
       _identifyMushroom();
     }

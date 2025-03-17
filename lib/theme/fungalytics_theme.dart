@@ -43,7 +43,7 @@ class FungalyticsTheme {
         (Set<WidgetState> states) =>
             states.contains(WidgetState.selected)
                 ? Colors.white
-                : null, // use default when not selected
+                : null, // Will use default when not selected
       ),
       trackColor: WidgetStateProperty.resolveWith<Color>(
         (Set<WidgetState> state) =>
@@ -100,7 +100,7 @@ class FungalyticsTheme {
         (Set<WidgetState> states) =>
             states.contains(WidgetState.selected)
                 ? const Color.fromARGB(255, 48, 48, 48)
-                : null, // use default when not selected
+                : null, // Will use default when not selected
       ),
       trackColor: WidgetStateProperty.resolveWith<Color>(
         (Set<WidgetState> state) =>

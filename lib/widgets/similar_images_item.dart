@@ -36,7 +36,6 @@ class _SimilarImagesItemState extends State<SimilarImagesItem> {
       height: 100,
       child: GestureDetector(
         onTap: () => _showImageScreen(context),
-        // onLongPress: () => _showImageScreen(context),
         child: Card(
           clipBehavior: Clip.hardEdge,
           elevation: 5,
