@@ -141,7 +141,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
                     ),
                   ],
                 ),
-                _buildSuggestions(),
+                if (_mushroom?.suggestions != []) ...[_buildSuggestions()],
               ],
             ),
           ),
@@ -179,18 +179,6 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
               onPressed: () => _pickImage(ImageSource.gallery),
             ),
           ),
-          // SizedBox(height: 8),
-          // SizedBox(
-          //   width: double.infinity,
-          //   child: ElevatedButton.icon(
-          //     icon: Icon(Icons.restart_alt),
-          //     label: Text(
-          //       "Clear",
-          //       style: TextStyle(fontWeight: FontWeight.bold),
-          //     ),
-          //     onPressed: () => setState(() => _selectedImage = null),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -216,11 +204,11 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
           Row(
             children: [
               SizedBox(width: 4),
-              Text("Found ${_mushroom?.suggestions?.length} suggestions:"),
+              Text("Found ${_mushroom?.suggestions.length} suggestions"),
             ],
           ),
           SizedBox(height: 8),
-          SuggestionsWidget(suggestions: _mushroom?.suggestions),
+          SuggestionsWidget(suggestions: _mushroom!.suggestions),
         ],
       ],
     );

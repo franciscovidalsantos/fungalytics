@@ -17,16 +17,12 @@ class MushroomMapper {
                 name: sugestion['name'],
                 probability: sugestion['probability'].toDouble(),
                 similarImages:
-                    sugestion['similar_images'] == null ||
-                            sugestion['similar_images'].isEmpty
-                        ? null
-                        : (sugestion['similar_images'] as List)
-                            .map(
-                              (similarimage) => MushroomSimilarImage(
-                                url: similarimage["url"],
-                              ),
-                            )
-                            .toList(),
+                    (sugestion['similar_images'] as List)
+                        .map(
+                          (similarimage) =>
+                              MushroomSimilarImage(url: similarimage["url"]),
+                        )
+                        .toList(),
               ),
             )
             .toList();

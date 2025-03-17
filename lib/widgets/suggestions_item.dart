@@ -8,7 +8,7 @@ class SuggestionsItem extends StatefulWidget {
     required this.index,
     required this.suggestion,
   });
-  final MushroomSuggestion? suggestion;
+  final MushroomSuggestion suggestion;
   final int index;
 
   @override
@@ -30,7 +30,7 @@ class _SuggestionsItemState extends State<SuggestionsItem> {
             children: [
               Expanded(
                 child: Text(
-                  widget.suggestion!.name,
+                  widget.suggestion.name,
                   // "Suggestion ${widget.index + 1}: ${widget.suggestion!.name}",
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -54,26 +54,17 @@ class _SuggestionsItemState extends State<SuggestionsItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Probability: ${((widget.suggestion?.probability ?? 0.0) * 100).toStringAsFixed(2)}%",
+                  "Probability: ${((widget.suggestion.probability) * 100).toStringAsFixed(2)}%",
                 ),
                 SizedBox(height: 8),
-                // if (_mushroom?.suggestions[i].similarImages == null &&
-                //                     _mushroom!.suggestions[i].similarImages!.any(
-                //                       (images) => false,
-                //                     ))
-
-                // TODO: understand if its worth it to only use this condition instead of the one above
-                // since we used a mock data that may return null for similarImages due to sending true regarding
-                // similar_images property inside of our POST request body
-                if (widget.suggestion?.similarImages == null ||
-                    widget.suggestion!.similarImages!.isEmpty)
+                if (widget.suggestion.similarImages.isEmpty)
                   ...[]
                 else ...[
                   Text("Similar Images:"),
                   SizedBox(height: 8),
                   SimilarImagesWidget(
-                    similarImages: widget.suggestion?.similarImages,
-                    suggestionName: widget.suggestion!.name,
+                    similarImages: widget.suggestion.similarImages,
+                    suggestionName: widget.suggestion.name,
                   ),
                 ],
               ],

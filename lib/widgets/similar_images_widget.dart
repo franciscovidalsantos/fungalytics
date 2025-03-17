@@ -9,7 +9,7 @@ class SimilarImagesWidget extends StatefulWidget {
     required this.similarImages,
     required this.suggestionName,
   });
-  final List<MushroomSimilarImage>? similarImages;
+  final List<MushroomSimilarImage> similarImages;
   final String suggestionName;
 
   @override
@@ -36,7 +36,7 @@ class _SimilarImagesWidgetState extends State<SimilarImagesWidget> {
                 child: Row(
                   spacing: 4,
                   children:
-                      widget.similarImages!
+                      widget.similarImages
                           .map(
                             (image) => SimilarImagesItem(
                               image: image,

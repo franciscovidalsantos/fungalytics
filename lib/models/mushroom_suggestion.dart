@@ -4,7 +4,7 @@ class MushroomSuggestion {
   final String id;
   final String name;
   final double probability;
-  final List<MushroomSimilarImage>? similarImages;
+  final List<MushroomSimilarImage> similarImages;
 
   MushroomSuggestion({
     required this.id,
