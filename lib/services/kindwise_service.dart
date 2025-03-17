@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:fungalytics/models/mushroom_response.dart';
 import 'package:fungalytics/services/mushroom_mapper.dart';
 import 'package:http/http.dart' as http;
@@ -22,12 +23,16 @@ class KindwiseService {
         final response = jsonDecode(request.body);
         return MushroomMapper.fromJson(response);
       } else {
-        print("Status Code: ${request.statusCode}");
-        print("Body ${request.body}");
+        throw "Failed to identify the mushroom.";
       }
+    } on SocketException {
+      throw "No Internet connection. Please check your network settings.";
+    } on HttpException {
+      throw "Couldn't find the mushroom identification service.";
+    } on FormatException {
+      throw "Bad response format from the server.";
     } catch (e) {
-      print("Exception: $e");
+      rethrow;
     }
-    return null;
   }
 }

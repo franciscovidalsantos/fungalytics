@@ -57,7 +57,7 @@ class _ScanPageScreenState extends State<ScanPageScreen> {
 
       setState(() => _mushroom = mushroom);
     } catch (e) {
-      _showError("Error identifying mushroom: $e");
+      _showError("$e");
     } finally {
       setState(() => _isLoading = false);
     }
