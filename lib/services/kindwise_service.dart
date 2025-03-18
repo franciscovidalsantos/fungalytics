@@ -5,7 +5,7 @@ import 'package:fungalytics/services/mushroom_mapper.dart';
 import 'package:http/http.dart' as http;
 
 class KindwiseService {
-  static const String _apiKey = ""; // our key
+  static const String _apiKey = ""; // API key
   static const String _baseUrl =
       "https://mushroom.kindwise.com/api/v1/identification";
 

@@ -29,3 +29,6 @@ flutter run
 
 ## API Integration
 Fungalytics uses the [Kindwise API](https://kindwise.com/) to analyze mushroom images and provide identification data. Ensure you obtain an API key and configure it within the app.
+
+### Key Configuration
+Insert your API key in kindwise_service.dart
