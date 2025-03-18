@@ -7,7 +7,7 @@ class MockKindwiseService {
   Future<MushroomResponse?> identifyMushroom(String base64Image) async {
     await Future.delayed(Duration(seconds: 2)); // simulate network delay
 
-    // change MockResponses enum value to test different types of response
+    // Change MockResponses enum value to test different types of response
     final response = MockResponses.notAMushroomWithSuggestions.response;
 
     return MushroomMapper.fromJson(response);
@@ -15,7 +15,7 @@ class MockKindwiseService {
 }
 
 enum MockResponses {
-  // removed "input" from all the responses since it's not needed
+  // Removed "input" from all the responses since it's not needed
   aMushroomwithFewSuggestions({
     "result": {
       "classification": {

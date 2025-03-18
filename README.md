@@ -17,7 +17,7 @@ It might be of interest to nature enthusiasts, foragers, and mycologists.
 ### Installation
 ```sh
 # Clone the repository
-git clone https://github.com/yourusername/fungalytics.git
+git clone https://github.com/franciscovidalsantos/fungalytics.git
 cd fungalytics
 
 # Install dependencies
@@ -29,3 +29,6 @@ flutter run
 
 ## API Integration
 Fungalytics uses the [Kindwise API](https://kindwise.com/) to analyze mushroom images and provide identification data. Ensure you obtain an API key and configure it within the app.
+
+### Key Configuration
+Insert your API key in kindwise_service.dart

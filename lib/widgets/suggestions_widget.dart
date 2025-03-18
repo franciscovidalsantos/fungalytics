@@ -25,8 +25,8 @@ class _SuggestionsWidgetState extends State<SuggestionsWidget> {
               ),
             ],
           ),
-          if (i != (widget.suggestions.length) - 1)
-            Divider(), // last item wont need a divider
+          // Here we want to remove the divider from last item in suggestions
+          if (i != (widget.suggestions.length) - 1) Divider(),
         ],
       ],
     );
